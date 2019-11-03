@@ -16,8 +16,8 @@ public class DeviceClass1 extends DeviceClass2 {
 
     public static DeviceClass1 parse(final JsonElement json) {
         final JsonObject jsonObject = json.getAsJsonObject();
-        final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsBoolean();
-        final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsBoolean();
+        final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsInt() != 0;
+        final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsInt() != 0;
         final String sensorType = jsonObject.get(JsonEnum.SENSOR_TYPE.toString()).getAsString();
         final String sensorValue = jsonObject.get(JsonEnum.SENSOR_VALUE.toString()).getAsString();
 
