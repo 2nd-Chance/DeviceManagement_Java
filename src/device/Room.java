@@ -56,8 +56,8 @@ public class Room {
         final JsonObject jsonObject = json.getAsJsonObject();
         final int id = jsonObject.get(JsonEnum.ID.toString()).getAsInt();
         final Location location = Location.parse(jsonObject.get(JsonEnum.LOCATION.toString()));
-        final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsBoolean();
-        final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsBoolean();
+        final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsInt() != 0;
+        final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsInt() != 0;
         final IntegerSet links = IntegerSet.parse(jsonObject.get(JsonEnum.LINKS.toString()));
         final StringSet staticDevices
             = StringSet.parse(jsonObject.get(JsonEnum.STATIC_DEVICE.toString()));
@@ -161,8 +161,8 @@ public class Room {
         final JsonObject json = new JsonObject();
         json.addProperty(JsonEnum.ID.toString(), this.getId());
         json.add(JsonEnum.LOCATION.toString(), this.getLocation().toJson());
-        json.addProperty(JsonEnum.ALERT_STATE.toString(), this.isAlertState());
-        json.addProperty(JsonEnum.ALIVE_STATE.toString(), this.isAliveState());
+        json.addProperty(JsonEnum.ALERT_STATE.toString(), this.isAlertState() ? 1 : 0);
+        json.addProperty(JsonEnum.ALIVE_STATE.toString(), this.isAliveState() ? 1 : 0);
         json.add(JsonEnum.LINKS.toString(), this.getLinks().toJson());
         json.add(JsonEnum.STATIC_DEVICE.toString(), this.getStaticDevices().toJson());
         json.add(JsonEnum.DYNAMIC_DEVICE.toString(), this.getDynamicDevices().toJson());

@@ -11,8 +11,8 @@ public class DeviceClass3 extends DeviceClass {
 
     public static DeviceClass3 parse(final JsonElement json) {
         final JsonObject jsonObject = json.getAsJsonObject();
-        final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsBoolean();
-        final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsBoolean();
+        final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsInt() != 0;
+        final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsInt() != 0;
 
         final DeviceClass3 deviceClass3 = new DeviceClass3();
         deviceClass3.setAlertState(alertState);
@@ -24,8 +24,8 @@ public class DeviceClass3 extends DeviceClass {
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty(JsonEnum.CLASS_ID.toString(), this.getClassId());
-        jsonObject.addProperty(JsonEnum.ALERT_STATE.toString(), this.isAlertState());
-        jsonObject.addProperty(JsonEnum.ALIVE_STATE.toString(), this.isAliveState());
+        jsonObject.addProperty(JsonEnum.ALERT_STATE.toString(), this.isAlertState() ? 1 : 0);
+        jsonObject.addProperty(JsonEnum.ALIVE_STATE.toString(), this.isAliveState() ? 1 : 0);
         return jsonObject;
     }
 }
