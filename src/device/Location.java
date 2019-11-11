@@ -83,7 +83,7 @@ public class Location {
 
     public void setLevel(final int level) {
         if (level == 0) {
-            throw new RuntimeException("Level cannot be set to 0.");
+            throw new InvalidLevelException("Level cannot be set to 0.");
         }
         this.level = level;
     }

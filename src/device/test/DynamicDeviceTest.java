@@ -1,6 +1,5 @@
 package device.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
@@ -16,7 +15,7 @@ public class DynamicDeviceTest {
     String jsonString;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         dynamicDevice = new DynamicDevice("10", new DeviceClass3(), "BT", 5);
         jsonString = "{\"id\":\"10\",\"dt\":\"d\",\"cl\":{\"ci\":3,\"ar\":false,\"al\":true},\"bm\":\"BT\",\"rm\":5}";
     }

@@ -1,6 +1,5 @@
 package device.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
@@ -23,14 +22,14 @@ public class DeviceTest {
     private String jsonStringDynamic;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         DeviceClass deviceClass1 = new DeviceClass1("type", "value");
         DeviceClass deviceClass3 = new DeviceClass3();
         staticDevice = new StaticDevice("uuid1", deviceClass1, "bt1", 1);
         dynamicDevice = new DynamicDevice("uuid2", deviceClass3, "bt2", 2);
 
-        jsonStringStatic = "{\"id\":\"uuid1\",\"dt\":\"s\",\"cl\":{\"ci\":1,\"ar\":false,\"al\":true,\"st\":\"type\",\"sv\":\"value\"},\"bm\":\"bt1\",\"rm\":1}";
-        jsonStringDynamic = "{\"id\":\"uuid2\",\"dt\":\"d\",\"cl\":{\"ci\":3,\"ar\":false,\"al\":true},\"bm\":\"bt2\",\"rm\":2}";
+        jsonStringStatic = "{\"id\":\"uuid1\",\"dt\":\"s\",\"cl\":{\"ci\":1,\"ar\":0,\"al\":1,\"st\":\"type\",\"sv\":\"value\"},\"bm\":\"bt1\",\"rm\":1}";
+        jsonStringDynamic = "{\"id\":\"uuid2\",\"dt\":\"d\",\"cl\":{\"ci\":3,\"ar\":0,\"al\":1},\"bm\":\"bt2\",\"rm\":2}";
     }
 
     @Test
