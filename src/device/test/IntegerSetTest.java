@@ -1,13 +1,11 @@
 package device.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import device.IntegerSet;
 import org.junit.Before;
-import org.junit.Test;
 
 public class IntegerSetTest {
 
@@ -15,7 +13,7 @@ public class IntegerSetTest {
     private String jsonString;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         integerSet = new IntegerSet();
         integerSet.add(10);
         integerSet.add(20);

@@ -36,9 +36,9 @@ public class Device {
         final JsonObject jsonObject = json.getAsJsonObject();
         final String deviceType = jsonObject.get(JsonEnum.DEVICE_TYPE.toString()).getAsString();
 
-        if (deviceType.equals("s")) {
+        if ("s".equals(deviceType)) {
             return StaticDevice.parse(json);
-        } else if (deviceType.equals("d")) {
+        } else if ("d".equals(deviceType)) {
             return DynamicDevice.parse(json);
         } else {
             return null;
@@ -110,7 +110,7 @@ public class Device {
 
     protected void setDeviceClass(final DeviceClass deviceClass) {
         if (deviceClass == null) {
-            throw new NullPointerException("Device class cannot be null");
+            throw new UndefinedDeviceClassException("Device class cannot be null");
         }
 
         this.deviceClass = deviceClass;

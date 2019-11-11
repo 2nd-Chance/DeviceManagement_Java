@@ -1,6 +1,5 @@
 package device.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
@@ -16,7 +15,7 @@ public class StaticDeviceTest {
     String jsonString;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         staticDevice = new StaticDevice("10", new DeviceClass2(), "BT", 5);
         jsonString = "{\"id\":\"10\",\"dt\":\"s\",\"cl\":{\"ci\":2,\"ar\":false,\"al\":true,\"st\":\"\",\"sv\":\"\"},\"bm\":\"BT\",\"rm\":5}";
     }

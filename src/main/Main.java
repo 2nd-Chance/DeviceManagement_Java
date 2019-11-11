@@ -1,27 +1,20 @@
-package device.test;
+package main;
 
-import static org.junit.Assert.assertEquals;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import device.DeviceBuilder;
 import device.DeviceClass1Builder;
 import device.DeviceClass2Builder;
 import device.DeviceClass3Builder;
 import device.DynamicDevice;
-import device.LocationBuilder;
+import device.Location;
 import device.Room;
 import device.RoomBuilder;
 import device.StaticDevice;
-import org.junit.Before;
-import org.junit.Test;
 
-public class RoomBuilderTest {
+public class Main {
 
-    @Before
-    public void setUp() {
-    }
-
-    @Test
-    public void build() {
+    public static void main(String[] args) {
         StaticDevice class3Device1 = new DeviceBuilder()
             .setUuid("10")
             .setDeviceClass(new DeviceClass3Builder()
@@ -53,26 +46,29 @@ public class RoomBuilderTest {
             .setRoomId(33)
             .buildDynamic();
 
-        Room room = new RoomBuilder()
+        final Gson gson = new Gson();
+        final Room room = new RoomBuilder()
             .setId(1)
-            .setLocation(new LocationBuilder()
-                .setLevel(7)
-                .setX(5)
-                .setY(-5)
-                .build()
-            )
+            .setLocation(new Location(7, 5, -5))
             .setAlertState(true)
             .setAliveState(false)
-            .addLink(2)
-            .addLink(3)
+            .addLink(2).addLink(3)
             .addStaticDevice(class3Device1)
             .addStaticDevice(class2Device2)
             .addDynamicDevice(class1Device3)
             .build();
+        System.out.println("\n<ROOM>\n" + room);
+        final String jsonString = gson.toJson(room.toJson());
+        System.out.println("\n<JSON>\n" + jsonString);
 
-        assertEquals("Room[id=1, location=Location[level=7, x=5, y=-5], "
-                + "alertState=true, aliveState=false, links=[2, 3], "
-                + "staticDevices=[20, 10], dynamicDevices=[30]]",
-            room.toString());
+        final JsonElement json = gson.fromJson(jsonString, JsonElement.class);
+        final Room parsed = Room.parse(json);
+        System.out.println("\n<PARSED>\n" + parsed);
+    }
+
+    private static void test1() {
+        final String str = "{\"al\":0,\"ar\":1,\"dd\":[\"30\"],\"id\":1,\"lc\":{\"lv\":7,\"x\":5,\"y\":-5},\"lk\":[2,3],\"sd\":[\"10\",\"20\"]}";
+        Room room = Room.parse(new Gson().fromJson(str, JsonElement.class));
+        System.out.println(room);
     }
 }

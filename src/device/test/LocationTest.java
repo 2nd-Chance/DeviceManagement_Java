@@ -1,6 +1,5 @@
 package device.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
@@ -15,7 +14,7 @@ public class LocationTest {
     String jsonString;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         location = new Location(10, 20, 30);
         jsonString = "{\"lv\":10,\"x\":20,\"y\":30}";
     }
