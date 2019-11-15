@@ -8,6 +8,7 @@ import java.util.StringJoiner;
 public class Room {
 
     private int id;
+    private String name;
     private Location location;
     private boolean alertState;
     private boolean aliveState;
@@ -36,8 +37,9 @@ public class Room {
     }
 
     public enum JsonEnum {
-        ID("id"), LOCATION("lc"), ALERT_STATE("ar"), ALIVE_STATE("al"),
-        LINKS("lk"), STATIC_DEVICE("sd"), DYNAMIC_DEVICE("dd");
+        ID("id"), NAME("nm"), LOCATION("lc"),
+        ALERT_STATE("ar"), ALIVE_STATE("al"), LINKS("lk"),
+        STATIC_DEVICE("sd"), DYNAMIC_DEVICE("dd");
 
         private final String string;
 
@@ -55,6 +57,7 @@ public class Room {
     public static Room parse(final JsonElement json) {
         final JsonObject jsonObject = json.getAsJsonObject();
         final int id = jsonObject.get(JsonEnum.ID.toString()).getAsInt();
+        final String name = jsonObject.get(JsonEnum.NAME.toString()).getAsString();
         final Location location = Location.parse(jsonObject.get(JsonEnum.LOCATION.toString()));
         final boolean alertState = jsonObject.get(JsonEnum.ALERT_STATE.toString()).getAsInt() != 0;
         final boolean aliveState = jsonObject.get(JsonEnum.ALIVE_STATE.toString()).getAsInt() != 0;
@@ -109,6 +112,14 @@ public class Room {
         this.id = id;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
     public Location getLocation() {
         return location;
     }
@@ -160,6 +171,7 @@ public class Room {
     public JsonObject toJson() {
         final JsonObject json = new JsonObject();
         json.addProperty(JsonEnum.ID.toString(), this.getId());
+        json.addProperty(JsonEnum.NAME.toString(), this.getName());
         json.add(JsonEnum.LOCATION.toString(), this.getLocation().toJson());
         json.addProperty(JsonEnum.ALERT_STATE.toString(), this.isAlertState() ? 1 : 0);
         json.addProperty(JsonEnum.ALIVE_STATE.toString(), this.isAliveState() ? 1 : 0);
